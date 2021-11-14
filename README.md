@@ -9,7 +9,21 @@ MidiUSB is wanted in `USB-MIDI.h` and `USB-MIDI_defs.h`
 `#define MidiUSB MIDIusb` gets error 'midiEventPacket_t' does not name a type  
       in USB-MIDI\src/USB-MIDI.h, so *relative* progress  
 
-### Arduino has its own `midiusb.h`
+### Arduino has its own `midiusb.h`?
 `class TMidiUSB:public MIDIusb` gets error `expected class-name before '{' token`,  
 	but `class MidiUSB:public EspTinyUSB` is accepted..??!   
 renamed libraries/ESP32TinyUSB/src/midiusb.h to libraries/ESP32TinyUSB/src/Tmidiusb.h
+
+`USBMIDI_CREATE_DEFAULT_INSTANCE` is defined in libraries/USB-MIDI/src/USB-MIDI.h  
+as USBMIDI_CREATE_INSTANCE(0, MIDI)
+
+#### downlevel Arduino SD 1.8.16 library
+/c/Users/bleke/Documents/Arduino/hardware/espressif/esp32/libraries/SD is version 2.0.0;
+/d/packages/Arduino/arduino-1.8.16/libraries/SD/library.properties is version 1.2.4
+```
+bleke@ALIENWARE-R7 MSYS /c/Users/bleke/Documents/Arduino/hardware/espressif/esp32/libraries
+$ cd /d/packages/Arduino/arduino-1.8.16/libraries
+
+bleke@ALIENWARE-R7 MSYS /d/packages/Arduino/arduino-1.8.16/libraries
+$ mv SD ..
+```

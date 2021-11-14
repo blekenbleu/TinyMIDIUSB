@@ -4,22 +4,30 @@
 #ifndef TinyMIDIUSB_h
 #define TinyMIDIUSB_h
 
-
 #include "esptinyusb.h"
-#include "Tmidiusb.h"
 #include "MIDIUSB_Defs.h"
+#include "Tmidiusb.h"
 
 //#define MidiUSB MIDIusb
 //MIDIusb MidiUSB;
 
-//class TMidiUSB:public MIDIusb
-class MidiUSB:public MIDIusb
+//class CMidiUSB:public MIDIusb
+class CMidiUSB
 {
   public:
-    bool isBogus();
+    size_t sendMIDI(midiEventPacket_t buffer) { return 1; }
+    midiEventPacket_t read(void);
+//  int read(void);
+    void flush(void) { return; }
 };
 
+extern CMidiUSB MidiUSB;
+
 #include "USB-MIDI.h"
+
+#define TUSBMIDI_CREATE_DEFAULT_INSTANCE() \
+USBMIDI_CREATE_DEFAULT_INSTANCE(); \
+CMidiUSB MidiUSB
 
 #if 1 // defined(ARDUINO_ARCH_AVR)
 
@@ -88,6 +96,7 @@ class MidiUSB:public MIDIusb
 #define MIDI_JACK_EMD							0x01
 #define MIDI_JACK_EXT							0X02
 
+#if 0	// blekenbleu 11/14/2021
 _Pragma("pack(1)")
 /// Midi Audio Control Interface Descriptor
 typedef struct
@@ -204,7 +213,6 @@ _Pragma("pack()")
 #define WEAK __attribute__ ((weak))
 
 #endif
-#if 0	// blekenbleu 11/14/2021
 /**
  	 Concrete MIDI implementation of a PluggableUSBModule
  	 By default, will define one midi in and one midi out enpoints.
