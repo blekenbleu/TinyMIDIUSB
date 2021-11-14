@@ -1,28 +1,29 @@
-//================================================================================
-//================================================================================
-
-/**
-	MIDI USB class
+/*
+  fake MIDI USB class
 */
-#ifndef MIDIUSB_h
-#define MIDIUSB_h
+#ifndef TinyMIDIUSB_h
+#define TinyMIDIUSB_h
 
-#include <stdint.h>
-#include <Arduino.h>
 
-#if ARDUINO < 10606
-#error MIDIUSB requires Arduino IDE 1.6.6 or greater. Please update your IDE.
-#endif
-
-#if !defined(USBCON)
-#error MIDIUSB can only be used with an USB MCU.
-#endif
-
+#include "esptinyusb.h"
+#include "Tmidiusb.h"
 #include "MIDIUSB_Defs.h"
 
-#if defined(ARDUINO_ARCH_AVR)
+//#define MidiUSB MIDIusb
+//MIDIusb MidiUSB;
 
-#include "PluggableUSB.h"
+//class TMidiUSB:public MIDIusb
+class MidiUSB:public MIDIusb
+{
+  public:
+    bool isBogus();
+};
+
+#include "USB-MIDI.h"
+
+#if 1 // defined(ARDUINO_ARCH_AVR)
+
+//#include "PluggableUSB.h"
 
 #define EPTYPE_DESCRIPTOR_SIZE		uint8_t
 #define EP_TYPE_BULK_IN_MIDI 		EP_TYPE_BULK_IN
@@ -32,7 +33,7 @@
 
 #elif defined(ARDUINO_ARCH_SAM)
 
-#include "USB/PluggableUSB.h"
+//#include "USB/PluggableUSB.h"
 
 #define EPTYPE_DESCRIPTOR_SIZE		uint32_t
 #define EP_TYPE_BULK_IN_MIDI		(UOTGHS_DEVEPTCFG_EPSIZE_512_BYTE | \
@@ -57,10 +58,10 @@
 #elif defined(ARDUINO_ARCH_SAMD)
 
 #if defined(ARDUINO_API_VERSION)
-#include "api/PluggableUSB.h"
+//#include "api/PluggableUSB.h"
 #define EPTYPE_DESCRIPTOR_SIZE		unsigned int
 #else
-#include "USB/PluggableUSB.h"
+//#include "USB/PluggableUSB.h"
 #define EPTYPE_DESCRIPTOR_SIZE		uint32_t
 #endif
 #define EP_TYPE_BULK_IN_MIDI 		USB_ENDPOINT_TYPE_BULK | USB_ENDPOINT_IN(0);
@@ -203,7 +204,7 @@ _Pragma("pack()")
 #define WEAK __attribute__ ((weak))
 
 #endif
-
+#if 0	// blekenbleu 11/14/2021
 /**
  	 Concrete MIDI implementation of a PluggableUSBModule
  	 By default, will define one midi in and one midi out enpoints.
@@ -246,5 +247,6 @@ public:
 	operator bool();
 };
 extern MIDI_ MidiUSB;
+#endif    // blekenbleu 11/14/2021
 
 #endif	/* MIDIUSB_h */
