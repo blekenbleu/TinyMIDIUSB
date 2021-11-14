@@ -27,3 +27,7 @@ $ cd /d/packages/Arduino/arduino-1.8.16/libraries
 bleke@ALIENWARE-R7 MSYS /d/packages/Arduino/arduino-1.8.16/libraries
 $ mv SD ..
 ```
+
+#### 11/14/2021: compiles, but does not link  
+Need cMidiUSB.cpp to create e.g. MidiUSB.read() from ESP32TinyUSB read()  
+
