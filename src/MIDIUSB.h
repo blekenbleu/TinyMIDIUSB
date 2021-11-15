@@ -4,10 +4,11 @@
 #ifndef TinyMIDIUSB_h
 #define TinyMIDIUSB_h
 
-#include "esptinyusb.h"
-#include "MIDIUSB_Defs.h"
-#include "Tmidiusb.h"
+#include "esptinyusb.h"        // Esp32TinyUSB/src
+#include "MIDIUSB_Defs.h"      // MIDIUSB/src/
+#include "Tmidiusb.h"          // Esp32TinyUSB/src/
 
+// glue MIDI_Library to ESP32TinyUSB
 //class CMidiUSB:public MIDIusb
 class CMidiUSB
 {
@@ -21,8 +22,12 @@ extern CMidiUSB MidiUSB;
 
 #include "USB-MIDI.h"
 
+// MIDIusb is the class for ESP32TinyUSB;
+// MIDI_Library/src/midi_Namespace.h: #define MIDI_NAMESPACE midi
+// CMidiUSB will use MIDIusb
 #define TUSBMIDI_CREATE_DEFAULT_INSTANCE() \
 USBMIDI_CREATE_DEFAULT_INSTANCE(); \
+MIDIusb Tmidi; \
 CMidiUSB MidiUSB
 
 #if 0 // defined(ARDUINO_ARCH_AVR)
@@ -33,7 +38,7 @@ CMidiUSB MidiUSB
 #define MIDI_BUFFER_SIZE		USB_EP_SIZE
 #define is_write_enabled(x)		(1)
 
-#elif 1 // defined(ARDUINO_ARCH_SAM)
+#elif defined(ARDUINO_ARCH_SAM)
 
 #define EPTYPE_DESCRIPTOR_SIZE		uint32_t
 #define EP_TYPE_BULK_IN_MIDI		(UOTGHS_DEVEPTCFG_EPSIZE_512_BYTE | \
@@ -72,12 +77,13 @@ CMidiUSB MidiUSB
 #define USB_Flush			USBDevice.flush
 #define is_write_enabled(x)		(1)
 
-#else
+//#else
 
-#error "Unsupported architecture"
+//#error "Unsupported architecture"
 
 #endif
 
+#if 0	// blekenbleu 11/14/2021
 #define MIDI_AUDIO							0x01
 #define MIDI_AUDIO_CONTROL						0x01
 #define MIDI_CS_INTERFACE						0x24
@@ -86,7 +92,6 @@ CMidiUSB MidiUSB
 #define MIDI_JACK_EMD							0x01
 #define MIDI_JACK_EXT							0X02
 
-#if 0	// blekenbleu 11/14/2021
 _Pragma("pack(1)")
 /// Midi Audio Control Interface Descriptor
 typedef struct
