@@ -1,5 +1,8 @@
-# TinyMIDIUSB
- fake Arduino USBMIDI sketches to use ESP32TinyUSB  
+## TinyMIDIUSB - fake MIDIUSB Library for Arduino
+ Glue transport layer [USB-MIDI](https://github.com/lathoub/Arduino-USBMIDI)
+to [ESP32TinyUSB](https://www.arduino.cc/reference/en/libraries/esp32tinyusb)  
+This should support [Control Surface](https://github.com/tttapa/Control-Surface),
+which is *extensively* documented.   
 
 MIDIusb is the class for ESP32TinyUSB, declared in `ESP32TinyUSB/src/midiusb.h`  
 MidiUSB is wanted in `USB-MIDI.h` and `USB-MIDI_defs.h`  
@@ -31,3 +34,6 @@ $ mv SD ..
 #### 11/14/2021: compiles, but does not link  
 Need cMidiUSB.cpp to create e.g. MidiUSB.read() from ESP32TinyUSB read()  
 
+#### 11/14/2021: compiles and links 
+Even though only `read()` is [implemented](src/MIDIUSB.cpp)...
+-  where are `write()`'s going?

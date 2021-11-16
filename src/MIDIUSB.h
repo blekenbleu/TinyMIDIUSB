@@ -12,13 +12,15 @@
 //class CMidiUSB:public MIDIusb
 class CMidiUSB
 {
+  MIDIusb Tmidi;
+
   public:
     size_t sendMIDI(midiEventPacket_t buffer) { return 1; }
     midiEventPacket_t read(void);
     void flush(void) { return; }
 };
-
 extern CMidiUSB MidiUSB;
+
 
 #include "USB-MIDI.h"
 
