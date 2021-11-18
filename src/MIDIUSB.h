@@ -5,7 +5,7 @@
 #define TinyMIDIUSB_h
 
 #include "esptinyusb.h"		// Esp32TinyUSB/src
-#include "MIDIUSB_Defs.h"	// MIDIUSB/src/
+#include "TMIDIUSB_Defs.h"	// MIDIUSB/src/
 #include "Tmidiusb.h"		// Esp32TinyUSB/src/
 
 // ESP32TinyUSB wrapper for MIDI_Library
