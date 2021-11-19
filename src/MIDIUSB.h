@@ -24,9 +24,11 @@ extern CMidiUSB MidiUSB;	// USB-MIDI/src/*.h expects this instance
 #define MIDIUSB_H		// disable Arduino MIDIUSB's src/MIDIUSB.h
 #define USB_MIDI_H		// disable Arduino USBMIDI's src/usbmidi.h
 #include "USB-MIDI.h"		// transport layer
+#define noteOn	sendNoteOn
+#define noteOff	sendNoteOff
 
 // CMidiUSB uses MIDIusb, a class from ESP32TinyUSB.
-#define TUSBMIDI_CREATE_DEFAULT_INSTANCE() \
+#define TinyUSBMIDI_CREATE_DEFAULT_INSTANCE() \
 USBMIDI_CREATE_DEFAULT_INSTANCE(); \
 MIDIusb Tmidi; \
 CMidiUSB MidiUSB
