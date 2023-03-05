@@ -1,4 +1,6 @@
-## TinyMIDIUSB - ESP32-S2 alternative MIDIUSB Library for Arduino
+## TinyMIDIUSB - ESP32-S2 alternative MIDIUSB Library for Arduino  
+*One of [several ESP32 repositories](https://github.com/blekenbleu/arduino-esp32#readme)*
+
  Glue transport layer [USB-MIDI](https://github.com/lathoub/Arduino-USBMIDI)
 to [ESP32TinyUSB](https://www.arduino.cc/reference/en/libraries/esp32tinyusb)  
 This should support [Control Surface](https://github.com/tttapa/Control-Surface),
